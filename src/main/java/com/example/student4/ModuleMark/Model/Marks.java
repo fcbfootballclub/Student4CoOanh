@@ -2,7 +2,6 @@ package com.example.student4.ModuleMark.Model;
 
 
 import lombok.*;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
@@ -19,8 +18,11 @@ public class Marks {
     private int ID;
     @Column(name = "idsinhvien")
     private int idSinhVien;
+    @Column(name = "idsubject")
     private int idSubject;
+    @Column(name = "mark")
     private float mark;
+    @Column(name = "note")
     private String note;
 
 }
