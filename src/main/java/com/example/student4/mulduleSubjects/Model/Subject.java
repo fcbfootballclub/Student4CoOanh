@@ -4,7 +4,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Subject")
+@Table(name = "tblsubject")
 @Getter
 @Setter
 @AllArgsConstructor

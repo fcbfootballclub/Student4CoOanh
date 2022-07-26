@@ -4,16 +4,18 @@ import com.example.student4.mulduleSubjects.Model.Subject;
 import com.example.student4.mulduleSubjects.Service.SubjectService;
 import com.example.student4.mulduleSubjects.Service.SubjectServiceImplement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/subject")
 public class SubjectAPI {
     @Autowired
-    SubjectService subjectService = new SubjectServiceImplement();
+    SubjectService subjectService;
 
     //get all subject
     @GetMapping(path = "/")
@@ -23,12 +25,12 @@ public class SubjectAPI {
 
     //get subject by id
     @GetMapping(path = "{id}")
-    Optional<Subject> getSubjectById(@PathVariable  long id){
+    Optional<Subject> getSubjectById(@PathVariable long id){
         return subjectService.getSubjectById(id);
     };
 
     @PostMapping(path = "")
-    void addSubject(@RequestBody  Subject subject){
+    void addSubject(@RequestBody Subject subject){
         subjectService.addSubject(subject);
     };
 
@@ -42,18 +44,23 @@ public class SubjectAPI {
         subjectService.deleteSubject(id);
     };
 
-    @GetMapping(path = "{name}")
+    @GetMapping(path = "/findByName/{name}")
     Optional<Subject> getSubjectByName(@PathVariable String name){
         return subjectService.getSubjectByName(name);
     };
 
-    @GetMapping(path = "{duration}")
+    @GetMapping(path = "/duration/{duration}")
     List<Subject> getSubjectBySem(@PathVariable int duration){
         return subjectService.getSubjectBySem(duration);
     };
 
-//    @GetMapping()
-//    List<Subject> orderBy();
+    @GetMapping(path = "/sort")
+    List<Subject> orderBy(@RequestParam(value = "field") String field, @RequestParam(value = "direction") String direction){
+        if(field.equals("field") && direction.equals("az")){
+            return subjectService.getAllSubject().stream().sorted((s1, s2) -> s1.getName().compareTo(s2.getName())).collect(Collectors.toList());
+        }
+        return null;
+    };
 
     @GetMapping(path = "/sumSubject")
     int sumSubject() {
