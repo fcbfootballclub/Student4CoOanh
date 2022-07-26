@@ -1,4 +1,4 @@
-package com.example.student4.Model;
+package com.example.student4.moduleStudent.Model;
 
 import lombok.Getter;
 import lombok.Setter;

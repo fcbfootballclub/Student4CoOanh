@@ -1,6 +1,6 @@
-package com.example.student4.Service;
+package com.example.student4.moduleStudent.Service;
 
-import com.example.student4.Model.Student;
+import com.example.student4.moduleStudent.Model.Student;
 
 import java.util.List;
 import java.util.Optional;
