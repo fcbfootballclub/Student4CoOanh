@@ -29,5 +29,10 @@ public class MarksAPI {
         marksService.addMarks(marks);
     }
 
-    
+    @PutMapping(path = "{id}")
+    void updateMark(@PathVariable long id, @RequestBody Marks marks){
+        marksService.updateMarks(id, marks);
+    }
+
+
 }
